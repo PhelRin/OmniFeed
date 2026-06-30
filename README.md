@@ -24,3 +24,8 @@
 5. **Zero-Login Setup:** Reads public chat streams anonymously—no Twitch or Kick OAuth logins or accounts are required.
 
 6. **Auto-Resolve Kick Chatroom ID:** Includes a background resolver that fetches your Kick chatroom ID dynamically.
+
+---
+
+<img width="381" height="587" alt="Screenshot 2026-06-30 033018" src="https://github.com/user-attachments/assets/ffc261f0-b1aa-4ba4-b5c1-b9c0282e1c50" />
+<img width="401" height="600" alt="Screenshot 2026-06-30 033002" src="https://github.com/user-attachments/assets/925456c5-f506-432b-9848-1717ed23b1cd" />
