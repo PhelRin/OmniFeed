@@ -22,9 +22,8 @@ A beautiful, lightweight, transparent, and lockable desktop overlay application 
 
 ## Preview
 
-| Unlocked Mode (Draggable & Configurable) | Locked Mode (Transparent & Click-Through) |
-| --- | --- |
-| Window has a border, drag handle, and settings gear. | Window is completely transparent and mouse clicks pass right through. |
+<img width="381" height="587" alt="Screenshot 2026-06-30 033018" src="https://github.com/user-attachments/assets/ffc261f0-b1aa-4ba4-b5c1-b9c0282e1c50" />
+<img width="401" height="600" alt="Screenshot 2026-06-30 033002" src="https://github.com/user-attachments/assets/925456c5-f506-432b-9848-1717ed23b1cd" />
 
 ## Installation
 
@@ -50,9 +49,3 @@ A beautiful, lightweight, transparent, and lockable desktop overlay application 
 - **Twitch IRC**: The app opens a native browser `WebSocket` connection to Twitch's public IRC server (`wss://irc-ws.chat.twitch.tv:443`) as an anonymous guest (`justinfanXXXXX`).
 - **Kick Pusher**: The app resolves your Kick channel slug to a chatroom ID via a hidden background window. Once resolved, it connects directly to Kick's public Pusher WebSocket cluster (`wss://ws-us2.pusher.com`).
 - **Persistence**: Configuration (channel names, window bounds, locked states, and visual preferences) is stored locally in a standard JSON config file in your system's app data directory.
-
-
----
-
-<img width="381" height="587" alt="Screenshot 2026-06-30 033018" src="https://github.com/user-attachments/assets/ffc261f0-b1aa-4ba4-b5c1-b9c0282e1c50" />
-<img width="401" height="600" alt="Screenshot 2026-06-30 033002" src="https://github.com/user-attachments/assets/925456c5-f506-432b-9848-1717ed23b1cd" />
