@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stream Chat Overlay</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <div id="app" class="unlocked">
+    <!-- Header Bar: Only interactive and visible when unlocked -->
+    <header id="window-header">
+      <div class="drag-region">
+        <span class="logo">💬 Stream Chat Overlay</span>
+        <span class="status-badge">Unlocked</span>
+      </div>
+      <button id="settings-toggle" class="header-btn" title="Open Settings">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+          <path d="M12 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Zm0-1.5a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/>
+          <path d="m19.4 13-.3-1.5.3-1.5c.3-.3.4-.6.2-.9l-1.5-2.6c-.2-.3-.5-.4-.8-.3l-1.5.6-1.3-.8-.3-1.5c-.1-.4-.4-.5-.7-.5h-3c-.3 0-.6.1-.7.5L9.6 7l-1.3.8-1.5-.6c-.3-.1-.6 0-.8.3l-1.5 2.6c-.2.3-.1.6.2.9l.3 1.5-.3 1.5c-.3.3-.4.6-.2.9l1.5 2.6c.2.3.5.4.8.3l1.5-.6 1.3.8.3 1.5c.1.4.4.5.7.5h3c.3 0 .6-.1.7-.5l.3-1.5 1.3-.8 1.5.6c.3.1.6 0 .8-.3l1.5-2.6c.2-.3.1-.6-.2-.9Zm-1.8 1.9-1.9-.8-.9.5c-.5.3-1.1.6-1.7.8l-1 .6-.2 2.1h-2l-.2-2.1-1-.6c-.6-.2-1.2-.5-1.7-.8l-.9-.5-1.9.8-1-1.7 1.7-1.3v-.6c-.1-.6-.1-1.2 0-1.7v-.6l-1.7-1.3 1-1.7 1.9.8.9-.5c.5-.3 1.1-.6 1.7-.8l1-.6.2-2.1h2l.2 2.1 1 .6c.6.2 1.2.5 1.7.8l.9.5 1.9-.8 1 1.7-1.7 1.3v.6c.1.6.1 1.2 0 1.7v.6l1.7 1.3-1 1.7Z"/>
+        </svg>
+      </button>
+    </header>
+
+    <!-- Hotkey Prompt Helper -->
+    <div id="hotkey-helper" class="helper-text">
+      Press <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>L</kbd> to lock/unlock position
+    </div>
+
+    <!-- Chat Messages Viewport -->
+    <main id="chat-viewport">
+      <div id="viewer-widget" class="hidden"></div>
+      <div id="chat-messages">
+        <!-- Messages will be injected here dynamically -->
+        <div class="chat-message system">
+          <div class="message-content">Welcome! Customize channels in settings, then lock the overlay with Ctrl+Shift+L to begin click-through streaming.</div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Settings Overlay / Panel -->
+    <div id="settings-overlay" class="hidden">
+      <div class="settings-modal">
+        <div class="settings-header">
+          <h2>Overlay Settings</h2>
+          <button id="close-settings" class="close-btn">&times;</button>
+        </div>
+        <div class="settings-body">
+          <div class="settings-section">
+            <h3>📡 Channel Configuration</h3>
+            
+            <div class="form-group">
+              <label for="twitch-channel">Twitch Channel Name</label>
+              <input type="text" id="twitch-channel" placeholder="e.g. PhelRin">
+            </div>
+
+            <div class="form-group">
+              <label for="twitch-client-id">Twitch Client ID</label>
+              <input type="text" id="twitch-client-id" placeholder="Paste your Twitch Developer Client ID">
+              <small class="helper-note" style="margin-top: 4px; display: block;">
+                Register an application on <a href="#" id="dev-twitch-link" style="color: #a855f7; text-decoration: underline;">dev.twitch.tv</a> with Redirect URL <code>http://localhost:3000</code> to get a Client ID.
+              </small>
+            </div>
+
+            <div class="form-group">
+              <label>Twitch Account Connection</label>
+              <div class="input-with-button">
+                <span id="twitch-auth-status" class="status-text warning font-bold" style="font-weight: 700; color: #ef4444; display: flex; align-items: center;">Not Connected</span>
+                <button id="twitch-login-btn" class="action-btn">Connect Twitch</button>
+              </div>
+              <small class="helper-note">Unlocks Twitch follow alerts, custom reward names, and premium chat connection.</small>
+            </div>
+
+            <div class="form-group">
+              <label for="kick-channel">Kick Channel Name</label>
+              <input type="text" id="kick-channel" placeholder="e.g. PhelRin">
+            </div>
+
+            <div class="form-group">
+              <label for="kick-chatroom-id">Kick Chatroom ID (Optional)</label>
+              <div class="input-with-button">
+                <input type="text" id="kick-chatroom-id" placeholder="Auto-resolved if blank">
+                <button id="resolve-kick-btn" class="action-btn">Auto-Resolve</button>
+              </div>
+              <small class="helper-note">Resolves ID dynamically by launching a background check on Kick.com</small>
+              <span id="resolve-status" class="status-text"></span>
+            </div>
+
+            <div class="form-group" style="margin-top: 15px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px;">
+              <label for="se-token">StreamElements JWT Token (For Tips)</label>
+              <input type="password" id="se-token" placeholder="Paste your StreamElements API JWT Token">
+              <small class="helper-note" style="margin-top: 4px; display: block;">
+                Unlocks real-time donation alerts. Get it from <a href="#" id="se-dashboard-link" style="color: #a855f7; text-decoration: underline;">streamelements.com</a> (Account -> Channel Secrets).
+              </small>
+            </div>
+          </div>
+
+          <div class="settings-section">
+            <h3>🎨 Visual customisation</h3>
+            
+            <div class="form-group">
+              <label for="theme-select">Style Theme</label>
+              <select id="theme-select" class="form-select">
+                <option value="glassmorphism">✨ Glassmorphism</option>
+                <option value="minimalist">🥚 Minimalist (Text Only)</option>
+                <option value="retro">👾 Retro Terminal</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="viewer-count-select">Viewers Count Display</label>
+              <select id="viewer-count-select" class="form-select">
+                <option value="hidden">Hidden</option>
+                <option value="combined">Combined Total (👥)</option>
+                <option value="separate">Separate Platforms (🟣/🟢)</option>
+              </select>
+            </div>
+
+            <div class="form-group slider-group">
+              <div class="slider-label">
+                <span>Locked Background Opacity</span>
+                <span id="opacity-val">20%</span>
+              </div>
+              <input type="range" id="opacity-slider" min="0" max="100" value="20">
+            </div>
+
+            <div class="form-group slider-group">
+              <div class="slider-label">
+                <span>Font Size</span>
+                <span id="font-size-val">16px</span>
+              </div>
+              <input type="range" id="font-size-slider" min="12" max="28" value="16">
+            </div>
+
+            <div class="form-group slider-group">
+              <div class="slider-label">
+                <span>Message Fadeout (Seconds)</span>
+                <span id="fade-val">Never Fades</span>
+              </div>
+              <input type="range" id="fade-slider" min="0" max="120" value="0">
+              <small class="helper-note">0 means messages stay forever. Good for overlays!</small>
+            </div>
+
+            <div class="form-group checkbox-row">
+              <label class="checkbox-container">
+                <input type="checkbox" id="show-badges-cb" checked>
+                <span class="checkmark"></span>
+                Show Chat Badges
+              </label>
+            </div>
+
+            <div class="form-group checkbox-row">
+              <label class="checkbox-container">
+                <input type="checkbox" id="show-icons-cb" checked>
+                <span class="checkmark"></span>
+                Show Platform Icons
+              </label>
+            </div>
+
+            <div class="form-group checkbox-row">
+              <label class="checkbox-container">
+                <input type="checkbox" id="disable-system-messages-cb">
+                <span class="checkmark"></span>
+                Hide System Info Messages (e.g., "Connected to Chat")
+              </label>
+            </div>
+
+            <div class="form-group checkbox-row">
+              <label class="checkbox-container">
+                <input type="checkbox" id="enable-sounds-cb">
+                <span class="checkmark"></span>
+                Enable Sound Notifications
+              </label>
+            </div>
+
+            <div class="form-group" id="sound-select-group">
+              <label for="sound-type-select">Notification Sound</label>
+              <div class="input-with-button">
+                <select id="sound-type-select" class="form-select">
+                  <option value="chime">🔔 Harmonic Chime</option>
+                  <option value="pop">🧼 Bubble Pop</option>
+                  <option value="blip">🎮 Retro Blip</option>
+                </select>
+                <button id="test-sound-btn" class="action-btn">🔊 Test</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="settings-section">
+            <h3>🗣️ Text-To-Speech (TTS)</h3>
+            
+            <div class="form-group">
+              <label for="tts-mode-select">TTS Mode</label>
+              <select id="tts-mode-select" class="form-select">
+                <option value="disabled">Disabled</option>
+                <option value="everyone">Speak for Everyone</option>
+                <option value="subs">Subscribers Only</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="tts-trigger-select">Activation Trigger</label>
+              <select id="tts-trigger-select" class="form-select">
+                <option value="all">Speak all messages</option>
+                <option value="command">Only speak !tts / !TTS command</option>
+              </select>
+            </div>
+
+            <div class="form-group slider-group">
+              <div class="slider-label">
+                <span>TTS Volume</span>
+                <span id="tts-volume-val">80%</span>
+              </div>
+              <input type="range" id="tts-volume-slider" min="0" max="100" value="80">
+            </div>
+          </div>
+
+          <div class="settings-section">
+            <h3>❤️ Support the Project</h3>
+            <button id="support-btn" class="support-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="12" height="12" fill="currentColor" style="margin-right: 4px; vertical-align: middle;">
+                <path d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z"/>
+              </svg>
+              Support on Patreon
+            </button>
+          </div>
+        </div>
+        <div class="settings-footer">
+          <button id="save-settings" class="primary-btn">Save Changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>

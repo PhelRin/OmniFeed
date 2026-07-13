@@ -1,0 +1,45 @@
+{
+  "name": "stream-chat-overlay",
+  "version": "3.0.0",
+  "description": "Transparent, lockable stream chat overlay for Twitch and Kick.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder build --win"
+  },
+  "build": {
+    "appId": "com.phelrin.streamchatoverlay",
+    "productName": "StreamChatOverlay",
+    "win": {
+      "icon": "build/icon.ico",
+      "target": [
+        "portable"
+      ]
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "index.html",
+      "index.css",
+      "renderer.js",
+      "icon.png"
+    ],
+    "directories": {
+      "output": "dist"
+    }
+  },
+  "keywords": [
+    "twitch",
+    "kick",
+    "chat",
+    "overlay",
+    "transparent",
+    "electron"
+  ],
+  "author": "PhelRin",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^42.5.0",
+    "electron-builder": "^26.15.3"
+  }
+}
