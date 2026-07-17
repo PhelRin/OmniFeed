@@ -1,4 +1,4 @@
-# Stream Chat Overlay
+# OmniFeed
 
 A beautiful, lightweight, transparent, and lockable desktop overlay application that merges Twitch and Kick chat streams into a single feed. Designed for streamers who want to read their chat, follow events, subscriber milestones, custom channel point redemptions, and donation tips easily on a single monitor setup.
 
