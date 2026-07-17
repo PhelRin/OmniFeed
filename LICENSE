@@ -1,19 +1,28 @@
-Personal Use License
+OmniFeed End User License Agreement (EULA)
 
-Copyright (c) 2026 PhelRin
+Copyright (c) 2026 PhelRin. All rights reserved.
 
-This software is provided free of charge for personal use, streaming, and educational purposes only.
+This software ("OmniFeed") is proprietary and closed-source. It is provided free of charge for personal use and live streaming purposes only.
 
-By using, copying, or distributing this software, you agree to the following terms:
+By installing, running, copying, or using this software, you agree to the following terms:
 
-1. PERSONAL USE ONLY
-You are permitted to run, modify, and use this software personally on your stream or computer.
+1. LICENSE GRANT & PERSONAL USE
+PhelRin grants you a personal, non-exclusive, non-transferable, revocable, royalty-free license to run and use the compiled executable of OmniFeed for personal live streaming, chat display, and entertainment. 
 
-2. NO COMMERCIAL RESELLING
-You may NOT sell, rent, lease, sublicense, or otherwise distribute this software (in source code or compiled binary format) for commercial profit, commercial gain, or financial compensation. Any commercial reselling or monetized distribution of this application is strictly prohibited.
+2. CLOSED SOURCE & INTELLECTUAL PROPERTY
+OmniFeed is closed-source. You may NOT:
+- Decompile, disassemble, reverse engineer, decrypt, or attempt to derive the source code of this software.
+- Modify, adapt, translate, or create derivative works based on this software.
+- Distribute, publish, copy, share, lease, rent, or sub-license the source code or compiled binaries of this software to any third-party websites, repositories, or distribution networks.
 
-3. REDISTRIBUTION & ATTRIBUTION
-You are not permitted to redistribute modifications of this software, provided that you keep this original license file, copyright notice, and attribution to "PhelRin" intact in all copies.
+3. NO COMMERCIAL USE OR RESELLING
+Selling, licensing, renting, or otherwise distributing this software (either in source code or compiled binary format) for commercial profit, commercial gain, or financial compensation is strictly prohibited.
 
-4. NO WARRANTY
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+4. OWNERSHIP
+All title, ownership rights, intellectual property rights, and copyright in and to OmniFeed (including but not limited to code, designs, assets, and branding) are owned solely and exclusively by PhelRin.
+
+5. TERMINATION
+This license is effective until terminated. Your rights under this license will terminate automatically without notice if you fail to comply with any of its terms.
+
+6. NO WARRANTY
+OMNIFEED IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. IN NO EVENT SHALL THE OWNER (PHEL RIN) BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY ARISING FROM THE USE OF THIS SOFTWARE.
